@@ -8,84 +8,8 @@ Video of the project: https://youtu.be/aWSiTR5RM2M
 
 It uses a PIC16F1579 running at 32MHz and three independent PWM as square wave generators and each of them is with a decay generator. The song is converted from midi and parsed by using Len Shustek's miditones. https://github.com/LenShustek/miditones
 
-The related schematic is as follows:
+The related schematic is at the hackaday.io page: https://hackaday.io/project/28016-case-study-a-polyphonic-pic18f-music-box/log/71114-man-some-roadblocks-and-it-works
 
-Schematic (1/2):
-
-
-                                           +5V
-                                           ^
-                                           |
-                                           +---------------------------------+
-                   PIC16F1579              |       74HC125                   |
-                  +------------------+     |      +-----------------+        |
-                  |                  |     |      |                 |        |
-                  |                  |     |      |                 |        |
-                  |                  |     |      |                 |        |
-  Gate1  +--------+ RB5          RB7 +------------+ 1/OE            |        |
-                  |                  |     |      |                 |        |
-                  |                  |     +------+ 1A              |        |
-                  |                  |     |      |                 |        |
-                  |                  |     | +----+ 1Y              |        |
-                  |                  |     | |    |                 |        |
-  Gate2  +--------+ RB4          RC7 +------------+ 2/OE       3/OE +-----+  |
-                  |                  |     | |    |                 |     |  |
-                  |                  |     +------+ 2A           3A +--------+
-                  |                  |       |    |                 |     |
-                  |                  |       | +--+ 2Y           3Y +--+  |
-                  |                  |       | |  |                 |  |  |
-  Gate3  +--------+ RC2          RB7 +----+  | |  |                 |  |  |
-                  |                  |    |  | |  |                 |  |  |
-                  |                  |    |  | |  |                 |  |  |
-                  +------------------+    |  | |  +-----------------+  |  |
-                                          |  | |                       |  |
-                                          +-------------------------------+
-                                             | |                       |
-                                             | +----+SqWave CH1        |
-                                             |                         |
-                                             +------+SqWave CH2        +-----+SqWave CH3
-
-Schematic (2/2):
-
-             EACH CHANNEL:
-                                              100K
-
-         SqWave CHx +----------------+--------/\/\/\/\------------>Output_x
-                                     |
-                                     \
-                                     /
-                                     \ 10K
-                                     /
-                                     \
-                         220         /
-                                     |
-            Gate_x  +----/\/\/\/\----+
-                                     |
-                                   + |
-                                    ---  10uF
-                                    ---
-                                     |
-                                    +++
-                                    ///
-
-
-
-           
-MIXING THREE CHANNELS TO LM386 MODULE:
-
-                                                                            //
-SqWave CH1  +---------------+            +-----------------+               //
-                            |  100nF     |                 |           +--+/+
-                            |            |                 +-----------+  | |
-SqWave CH2  +---------------+-----||---->+ LM386 module    |           |  | |
-                            |            |                 +-----------+  | |
-                            |            |                 |           +--+\+
-SqWave CH3  +---------------+            +-----------------+               \\
-                                                                            \\
-
-                                                                        4 OR 8 OHM SPEAKER
-                                                                        
-                                                                        
 This is using MikroC for PIC and compiles within the demo limit.
 
 Issues:
