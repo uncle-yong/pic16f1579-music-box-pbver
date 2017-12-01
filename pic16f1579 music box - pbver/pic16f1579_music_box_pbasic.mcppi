@@ -1,0 +1,56 @@
+[DEVICE]
+Name=P16F1579
+Clock=32000000
+[MEMORY_MODEL]
+Value=0
+[BUILD_TYPE]
+Value=0
+[ACTIVE_TAB]
+Value=songdata.h
+[USE_EEPROM]
+Value=0
+[USE_HEAP]
+Value=0
+[HEAP_SIZE]
+Value=2000
+[EEPROM_DEFINITION]
+Value=
+[FILES]
+Count=2
+File0=main.c
+File1=tuningwords.c
+[BINARIES]
+Count=0
+[IMAGES]
+Count=0
+ActiveImageIndex=-1
+[OPENED_FILES]
+Count=3
+File0=main.c
+File1=tuningwords.c
+File2=songdata.h
+[EEPROM]
+Count=0
+[ACTIVE_COMMENTS_FILES]
+Count=0
+[OTHER_FILES]
+Count=0
+[SEARCH_PATH]
+Count=3
+Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\
+Path1=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Uses\P16_Enh\
+Path2=C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\
+[HEADER_PATH]
+Count=1
+Path0=C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\
+[HEADERS]
+Count=1
+File0=songdata.h
+[PLDS]
+Count=0
+[Useses]
+Count=0
+[EXPANDED_NODES]
+Node0=Sources
+Node1=Header Files
+Count=2
