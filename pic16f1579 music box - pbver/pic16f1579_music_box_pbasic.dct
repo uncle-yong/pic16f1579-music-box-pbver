@@ -2058,7 +2058,15 @@ slrc7_bit
 slrcona
 slrconb
 slrconc
+songaddr
+songbankcount
 songdata1
+songdata2
+songdata3
+songdata3a
+songdata5
+songdata6
+songdatainput
 songindex
 spbrg
 spbrgh

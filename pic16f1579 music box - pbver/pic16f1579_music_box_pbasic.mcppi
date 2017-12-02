@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=songdata.h
+Value=main.c
 [USE_EEPROM]
 Value=0
 [USE_HEAP]
@@ -28,7 +28,7 @@ ActiveImageIndex=-1
 Count=3
 File0=main.c
 File1=tuningwords.c
-File2=songdata.h
+File2=songbank.h
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -44,8 +44,9 @@ Path2=C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\
 Count=1
 Path0=C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\
 [HEADERS]
-Count=1
+Count=2
 File0=songdata.h
+File1=songbank.h
 [PLDS]
 Count=0
 [Useses]

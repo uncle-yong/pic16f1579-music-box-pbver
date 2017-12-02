@@ -1,5 +1,5 @@
 #include "songdata.h"
-//#include "tuningwords.h"
+#include "songbank.h"
 
 // Christmas midi source: https://www.mfiles.co.uk/christmas-music-and-carols.htm
 // midi notes to frequency: http://subsynth.sourceforge.net/midinote2freq.html
@@ -16,6 +16,10 @@ unsigned char isPlaying = 0;
 unsigned int time_play_count = 0;
 
 extern const unsigned int tuningWords[128];
+
+unsigned char songBankCount = 0;
+unsigned char* songAddr[5] = { &songData2, &songData3, &songData3a, &songData5, &songData6 };
+unsigned char* songDataInput;
 
 unsigned int c1CapDischargeCount = 0;
 const unsigned int c1CapDischargeMaxTime = 150;
@@ -241,10 +245,10 @@ void init_pwm3() {
 
 void updateNote() {
     while(1) {
-           cmd = songData1[songIndex];
+           cmd = songDataInput[songIndex];
 
            if(cmd < 0x80) {
-              time_play = ( (songData1[songIndex] << 8) | songData1[songIndex+1] );
+              time_play = ( (songDataInput[songIndex] << 8) | songDataInput[songIndex+1] );
               songIndex += 2;
               break;
            }
@@ -274,24 +278,24 @@ void updateNote() {
                   case 0:
                           c1CapDischargeCount = 0;
                           TRISB.TRISB5 = 0;
-                          PWM1PR = tuningWords[songData1[songIndex+1]];
-                          PWM1DC = tuningWords[songData1[songIndex+1]] >> 1;
+                          PWM1PR = tuningWords[songDataInput[songIndex+1]];
+                          PWM1DC = tuningWords[songDataInput[songIndex+1]] >> 1;
                           PWM1LDCON.PWM1LD = 1;     // Load Buffer.
                           PWM1CON.PWM1EN = 1;
                          break;
                   case 1: 
                           c2CapDischargeCount = 0;
                           TRISB.TRISB4 = 0;
-                          PWM2PR = tuningWords[songData1[songIndex+1]];
-                          PWM2DC = tuningWords[songData1[songIndex+1]] >> 1;
+                          PWM2PR = tuningWords[songDataInput[songIndex+1]];
+                          PWM2DC = tuningWords[songDataInput[songIndex+1]] >> 1;
                           PWM2LDCON.PWM2LD = 1;     // Load Buffer.
                           PWM2CON.PWM2EN = 1;
                          break;
                   case 2: 
                           c3CapDischargeCount = 0;
                           TRISC.TRISC2 = 0;
-                          PWM3PR = tuningWords[songData1[songIndex+1]];
-                          PWM3DC = tuningWords[songData1[songIndex+1]] >> 1;
+                          PWM3PR = tuningWords[songDataInput[songIndex+1]];
+                          PWM3DC = tuningWords[songDataInput[songIndex+1]] >> 1;
                           PWM3LDCON.PWM3LD = 1;     // Load Buffer.
                           PWM3CON.PWM3EN = 1;
                          break;
@@ -302,15 +306,41 @@ void updateNote() {
 
            }
 
-         else if(opcode == 0xf0) {  // stop playing score!
+         else if(opcode == 0xf0) {      // stop playing score!
+                                        // and move to the next score!
+                #ifdef PLAY_ONE_REPEAT  // Play one song only and no repeat.
                 isPlaying = 0;
+                #else
+                
+                if(songBankCount > 4)
+                   songBankCount = 0;
+                else
+                   songBankCount++;
+                   
+                songDataInput = songAddr[songBankCount];     // Next song.
+                
+                c1CapDischargeCount = 0;                     // Reset the cap discharge count values!
+                c2CapDischargeCount = 0;
+                c3CapDischargeCount = 0;
+                
+                TRISB.TRISB5 = 0;                            // Discharge all caps!
+                TRISB.TRISB4 = 0;
+                TRISC.TRISC2 = 0;
+                
+                songIndex = 0;                               // Reset all values in the note update function!
+                time_play_count = 0;
+                time_play = 0;
+                opcode = 0;
+                chan = 0;
+                
+                delay_ms(2000);
+                
+                #endif
                 break;
          }
 
          else if(opcode == 0xe0) {  // start playing from beginning!
-               songIndex = 0;
-               time_play_count = 0;
-               time_play = 0;
+
                break;
          }
        }
@@ -330,21 +360,20 @@ void main() {
     init_pwm3();
 
     init_intr();
-
+    
+    songDataInput = (unsigned char*)songAddr[0];
     isPlaying = 1;
-
+    
     init_timer1();
 
     while(1) {
-       //PORTA.RA2 ^= 1;
-       //delay_ms(500);
 
        if (isPlaying == 1)
         {
           if (isUpdateNote)
             {
-        	updateNote();
-        	isUpdateNote = 0;
+                updateNote();
+                isUpdateNote = 0;
             }
         }
       else
@@ -352,6 +381,7 @@ void main() {
           PWM1CON.PWM1EN = 0;
           PWM2CON.PWM2EN = 0;
           PWM3CON.PWM3EN = 0;
+          asm sleep;
         }
 
     }

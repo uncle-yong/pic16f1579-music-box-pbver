@@ -1,14 +1,19 @@
 0	1	mikroCPIC1618.exe -MSF -DBG -pP16F1579 -DL -O11111114 -fo32 -N"C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\pic16f1579_music_box_pbasic.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Uses\P16_Enh\" -SP"C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\" -IP"C:\Users\comp1\Documents\pic_projects_2017\pic16f1579 music box - pbver\" "main.c" "tuningwords.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl"	 
 hint: 0	1139	Available RAM: 992 [bytes], Available ROM: 8192 [bytes]	 
 diagnostics: 0	122	Compilation Started	songdata.h
+warning: 21	1505	Suspicious pointer conversion	main.c
+warning: 21	1505	Suspicious pointer conversion	main.c
+warning: 21	1505	Suspicious pointer conversion	main.c
+warning: 21	1505	Suspicious pointer conversion	main.c
+warning: 21	1505	Suspicious pointer conversion	main.c
 hint: 0	1004	interrupt handler (timer1interrupt at 0x0004)	main.c
-diagnostics: 358	123	Compiled Successfully	main.c
+diagnostics: 388	123	Compiled Successfully	main.c
 diagnostics: 0	122	Compilation Started	tuningwords.c
 diagnostics: 10	123	Compiled Successfully	tuningwords.c
-diagnostics: 0	127	All files Compiled in 94 ms	 
-hint: 0	1144	Used RAM (bytes): 17 (2%)  Free RAM (bytes): 975 (98%)	Used RAM (bytes): 17 (2%)  Free RAM (bytes): 975 (98%)
-hint: 0	1144	Used ROM (program words): 1669 (20%)  Free ROM (program words): 6523 (80%)	Used ROM (program words): 1669 (20%)  Free ROM (program words): 6523 (80%)
+diagnostics: 0	127	All files Compiled in 125 ms	 
+hint: 0	1144	Used RAM (bytes): 30 (3%)  Free RAM (bytes): 962 (97%)	Used RAM (bytes): 30 (3%)  Free RAM (bytes): 962 (97%)
+hint: 0	1144	Used ROM (program words): 4824 (59%)  Free ROM (program words): 3368 (41%)	Used ROM (program words): 4824 (59%)  Free ROM (program words): 3368 (41%)
 diagnostics: 0	125	Project Linked Successfully	pic16f1579_music_box_pbasic.mcppi
-diagnostics: 0	128	Linked in 47 ms	 
-diagnostics: 0	129	Project 'pic16f1579_music_box_pbasic.mcppi' completed: 157 ms	 
-diagnostics: 0	103	Finished successfully: 01 Dec 2017, 22:23:39	pic16f1579_music_box_pbasic.mcppi
+diagnostics: 0	128	Linked in 62 ms	 
+diagnostics: 0	129	Project 'pic16f1579_music_box_pbasic.mcppi' completed: 203 ms	 
+diagnostics: 0	103	Finished successfully: 02 Dec 2017, 11:02:31	pic16f1579_music_box_pbasic.mcppi
